@@ -25,7 +25,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // ✅ Update CORS settings
-app.use(cors({ origin: "https://standardsclubvitv.github.io", methods: "POST, OPTIONS" }));
+app.use(cors({ origin: "https://standardsclubvitv.github.io", methods: "POST, GET, OPTIONS" }));
 app.use(express.json());
 
 // ✅ Handle preflight requests (Important for CORS)
