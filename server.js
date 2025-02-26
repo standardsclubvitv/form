@@ -24,9 +24,17 @@ const db = admin.firestore();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors());
+// ✅ Update CORS settings
+app.use(cors({ origin: "https://standardsclubvitv.github.io", methods: "POST, OPTIONS" }));
 app.use(express.json());
+
+// ✅ Handle preflight requests (Important for CORS)
+app.options("/submit-form", (req, res) => {
+    res.set("Access-Control-Allow-Origin", "https://standardsclubvitv.github.io");
+    res.set("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.set("Access-Control-Allow-Headers", "Content-Type");
+    res.status(204).send(); // No content response
+});
 
 // API Route to handle form submissions
 app.post("/submit-form", async (req, res) => {
