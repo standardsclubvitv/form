@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import admin from "firebase-admin";
+import { fileURLToPath } from "url";  // ✅ Import this
+import path from "path";  // ✅ Import this
 
 // Load environment variables
 dotenv.config();
@@ -24,9 +26,10 @@ const db = admin.firestore();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ✅ Allow JSON parsing
+// ✅ Fix the missing fileURLToPath issue
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
 app.use(express.json());
 app.use(cors({
     origin: 'https://standardsclubvitv.github.io', // Use this exact URL
